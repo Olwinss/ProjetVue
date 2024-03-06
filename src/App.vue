@@ -11,7 +11,6 @@ import HomePage from './components/HomePage.vue'
   <router-view></router-view>
   <HomePage msg="Vite + Vue" />
 
-<template>
   <HomePage msg="Vite + Vue" />
 </template>
 
