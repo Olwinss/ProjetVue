@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue'
+import '/public/homepage.css';
+
 </script>
 
 <template>

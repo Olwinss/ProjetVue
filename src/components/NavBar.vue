@@ -1,7 +1,6 @@
 <script setup>
 
 import { router } from '../router';
-import '/public/homepage.css';
 
 defineProps({
     msg: String,
