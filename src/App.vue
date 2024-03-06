@@ -1,12 +1,13 @@
 <script setup>
-import HomePage from './components/HomePage.vue'
+
+import NavBar from './components/NavBar.vue'
 </script>
 
 <template>
-  <HomePage msg="Vite + Vue" />
+  <NavBar/>
+
 </template>
 
 <style scoped>
 
 </style>
-
