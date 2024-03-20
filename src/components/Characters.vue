@@ -15,10 +15,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="Character in paginatedCharacters" :key="Character.id">
-            <td>{{ Character.attributes.name }}</td>
-            <td>{{ Character.attributes.born }}</td>
-            <td>{{ Character.attributes.house }}</td>
+          <tr v-for="character in paginatedCharacters" :key="character.id">
+            <td>{{ character.attributes.name }}</td>
+            <td>{{ character.attributes.born }}</td>
+            <td>{{ character.attributes.house }}</td>
           </tr>
         </tbody>
       </table>
@@ -36,23 +36,32 @@
   
   const Characters = ref([])
   const searchQuery = ref('')
-  const itemsPerPage = 10
+  const itemsPerPage = 20
   let currentPage = ref(1)
   
   onMounted(async () => {
     try {
-      const response = await axios.get('https://api.potterdb.com/v1/characters')
-      Characters.value = Object.values(response.data)[0] // récupère les valeurs sous forme d'array
+      await fetchData()
     } catch (error) {
       console.error("Problème de chargement des Characters via l'api", error)
     }
   })
   
+  async function fetchData() {
+    try {
+        console.log(`https://api.potterdb.com/v1/characters?page[size]=${itemsPerPage}&page[number]=${currentPage.value}`)
+      const response = await axios.get(`https://api.potterdb.com/v1/characters?page[size]=${itemsPerPage}&page[number]=${currentPage.value}`)
+      Characters.value = response.data.data
+    } catch (error) {
+      console.error("Problème de chargement des Characters via l'api", error)
+    }
+  }
+  
   const filteredCharacters = computed(() => {
-    return Characters.value.filter(Character => {
-      return Character.attributes.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      Character.attributes.born.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-        Character.attributes.house.toLowerCase().includes(searchQuery.value.toLowerCase())
+    return Characters.value.filter(character => {
+      return character.attributes.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+        character.attributes.born.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+        character.attributes.house.toLowerCase().includes(searchQuery.value.toLowerCase())
     })
   })
   
@@ -69,12 +78,14 @@
   function nextPage() {
     if (currentPage.value < totalPages.value) {
       currentPage.value++
+      fetchData()
     }
   }
   
   function previousPage() {
     if (currentPage.value > 1) {
       currentPage.value--
+      fetchData()
     }
   }
   </script>
