@@ -10,7 +10,7 @@
             </div>
             <p v-if="isPotionLoaded && potion.data.attributes.effect !== null">Effet : {{ potion.data.attributes.effect }}</p>
             <p v-if="isPotionLoaded && potion.data.attributes.ingredients !== null">Ingrédients : {{ potion.data.attributes.ingredients }}</p>
-
+            <a v-if="isPotionLoaded && potion.data.attributes.wiki !== null" :href="potion.data.attributes.wiki" target="_blank">En savoir plus sur le Wiki</a>
         </div>
     </div>
 </template>
