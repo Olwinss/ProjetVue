@@ -15,13 +15,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="spell in filteredSpells" :key="spell.id">
+        <tr v-for="spell in paginatedSpells" :key="spell.id">
           <td>{{ spell.attributes.name }}</td>
           <td>{{ spell.attributes.effect }}</td>
           <td>{{ spell.attributes.category }}</td>
         </tr>
       </tbody>
     </table>
+    <div id="pagination">
+      <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
+      <span>{{ currentPage }}</span>
+      <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+    </div>
   </div>
 </template>
 
@@ -31,6 +36,8 @@ import axios from 'axios'
 
 const spells = ref([])
 const searchQuery = ref('')
+const itemsPerPage = 10
+let currentPage = ref(1)
 
 onMounted(async () => {
   try {
@@ -48,6 +55,28 @@ const filteredSpells = computed(() => {
       spell.attributes.category.toLowerCase().includes(searchQuery.value.toLowerCase())
   })
 })
+
+const paginatedSpells = computed(() => {
+  const startIndex = (currentPage.value - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  return filteredSpells.value.slice(startIndex, endIndex)
+})
+
+const totalPages = computed(() => {
+  return Math.ceil(filteredSpells.value.length / itemsPerPage)
+})
+
+function nextPage() {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++
+  }
+}
+
+function previousPage() {
+  if (currentPage.value > 1) {
+    currentPage.value--
+  }
+}
 </script>
 
 <style scoped>
@@ -77,5 +106,14 @@ th,
 td {
   min-width: 120px;
   padding: 10px 20px;
+}
+
+#pagination {
+  margin-top: 10px;
+}
+
+#pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
 }
 </style>
