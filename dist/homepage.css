@@ -1,10 +1,9 @@
 body{
-    width: 100vw;
-    height: 99vh;
+    width: 98vw;
+    height: 98vh;
     background-image: url('/home/Olwinss/ProjetVue/public/homepagegbg.jpg');
-    background-size: 100%;
+    background-size: 99%;
     background-repeat:no-repeat;
-
     background-color: black;
     color: rgb(255, 255, 255);
 }
