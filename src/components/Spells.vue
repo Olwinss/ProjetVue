@@ -43,7 +43,9 @@ onMounted(async () => {
 
 const filteredSpells = computed(() => {
   return spells.value.filter(spell => {
-    return spell.attributes.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+    return spell.attributes.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    spell.attributes.effect.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      spell.attributes.category.toLowerCase().includes(searchQuery.value.toLowerCase())
   })
 })
 </script>
