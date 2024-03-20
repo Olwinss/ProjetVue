@@ -26,7 +26,7 @@ onMounted(async () => {
     <div id="potions">
         <ul class="centered-list">
             <li v-for="potion in potions.data" :key="potion.id">
-                <router-link style="text-decoration: none; color: inherit;" :to="{ name: potion.name, params: { id: potion.name } }">
+                <router-link style="text-decoration: none; color: inherit;" :to="'potions/' + potion.attributes.name">
                     {{ potion.attributes.name }}
                 </router-link>
             </li>
