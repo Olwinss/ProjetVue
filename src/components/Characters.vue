@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="character in paginatedCharacters" :key="character.id">
+        <tr v-for="character in filteredCharacters" :key="character.id">
           <td>{{ character.attributes.name }}</td>
           <td>{{ character.attributes.born }}</td>
           <td>{{ character.attributes.house }}</td>
@@ -31,8 +31,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import { Vue } from 'vue'
+import { ref, onMounted, computed} from 'vue'
 import axios from 'axios'
 
 const Characters = ref([])
@@ -52,15 +51,16 @@ async function fetchData() {
   try {
     // Réinitialisation de la liste des personnages à chaque appel
     Characters.value = []
-
+    
     const response = await axios.get(`https://api.potterdb.com/v1/characters?page[size]=${itemsPerPage}&page[number]=${currentPage.value}`)
-    // Utilisation de Vue.set() pour mettre à jour Characters.value
-    Vue.set(Characters, 'value', response.data.data)
+    Characters.value = response.data.data
+    console.log(Characters.value)
+    $forceUpdate();
+
   } catch (error) {
     console.error("Problème de chargement des Characters via l'api", error)
   }
 }
-
 
 
 const filteredCharacters = computed(() => {
@@ -69,16 +69,6 @@ const filteredCharacters = computed(() => {
       character.attributes.born.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       character.attributes.house.toLowerCase().includes(searchQuery.value.toLowerCase())
   })
-})
-
-const paginatedCharacters = computed(() => {
-  const startIndex = (currentPage.value - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage
-  return filteredCharacters.value.slice(startIndex, endIndex)
-})
-
-const totalPages = computed(() => {
-  return Math.ceil(filteredCharacters.value.length / itemsPerPage)
 })
 
 async function nextPage() {
