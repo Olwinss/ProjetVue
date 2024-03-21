@@ -3,8 +3,14 @@
     <div id="title">
       <h1>Page des personnages</h1>
     </div>
-    <form id="search">
-      Search <input name="search" v-model="searchQuery">
+    <form id="search"> Search <input name="search" v-model="searchQuery">
+      <input type="number" v-model="desiredPage" min="1" :max="nbpage">
+      <button @click="goToPage">Go</button>
+      <div id="pagination">
+        <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
+        <span>{{ currentPage }}</span>
+        <button @click="nextPage" :disabled="currentPage === nbpage">Next</button>
+      </div>
     </form>
     <table>
       <thead>
@@ -25,7 +31,7 @@
     <div id="pagination">
       <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
       <span>{{ currentPage }}</span>
-      <button @click="nextPage" :disabled="currentPage === 0">Next</button>
+      <button @click="nextPage" :disabled="currentPage === nbpage">Next</button>
     </div>
   </div>
 </template>
@@ -36,8 +42,10 @@ import axios from 'axios'
 
 const Characters = ref([])
 const searchQuery = ref('')
-const itemsPerPage = 20
+const itemsPerPage = 20 // un trop gros nombre ne fonctionnera pas pour la pagination
 let currentPage = ref(1)
+const desiredPage = ref(1)
+let nbpage = ref(1);
 
 onMounted(async () => {
   try {
@@ -51,17 +59,13 @@ async function fetchData() {
   try {
     // Réinitialisation de la liste des personnages à chaque appel
     Characters.value = []
-    
     const response = await axios.get(`https://api.potterdb.com/v1/characters?page[size]=${itemsPerPage}&page[number]=${currentPage.value}`)
     Characters.value = response.data.data
-    console.log(Characters.value)
-    $forceUpdate();
-
+    nbpage = Math.floor((response.data.meta.pagination.records+itemsPerPage)/itemsPerPage) // permet de s'assurer qu'un élement ne soit pas exclu 
   } catch (error) {
     console.error("Problème de chargement des Characters via l'api", error)
   }
 }
-
 
 const filteredCharacters = computed(() => {
   return Characters.value.filter(character => {
@@ -72,7 +76,7 @@ const filteredCharacters = computed(() => {
 })
 
 async function nextPage() {
-  if (currentPage.value < 1000) {
+  if (currentPage.value < nbpage) {
     currentPage.value++
     await fetchData() // Appel de fetchData pour charger les données de la nouvelle page
   }
@@ -81,6 +85,13 @@ async function nextPage() {
 async function previousPage() {
   if (currentPage.value > 1) {
     currentPage.value--
+    await fetchData() // Appel de fetchData pour charger les données de la nouvelle page
+  }
+}
+
+async function goToPage() {
+  if (desiredPage.value >= 1 && desiredPage.value <= nbpage) {
+    currentPage.value = desiredPage.value
     await fetchData() // Appel de fetchData pour charger les données de la nouvelle page
   }
 }
