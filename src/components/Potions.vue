@@ -11,7 +11,7 @@
         <button @click="fetchData">Rechercher</button>
       </form>
       <ul class="centered-list">
-        <li v-for="potion in paginatedPotions" :key="potion.id">
+        <li v-for="potion in Potions" :key="potion.id">
           <router-link style="text-decoration: none; color: inherit;" :to="'/potions/' + potion.attributes.name">
             {{ potion.attributes.name }}
           </router-link>
@@ -71,28 +71,94 @@
     }
   }
   
-  const paginatedPotions = computed(() => {
-    const startIndex = (currentPage.value - 1) * itemsPerPage
-    const endIndex = startIndex + itemsPerPage
-    return Potions.value.slice(startIndex, endIndex)
-  })
   </script>
   
   <style scoped>
-  .centered-list {
-    text-align: center;
-    list-style-type: none;
-    text-decoration: none;
-    padding-bottom: 30px;
-  }
-  
-  #pagination {
-    margin-top: 10px;
-  }
-  
-  #pagination button {
-    margin: 0 5px;
-    padding: 5px 10px;
-  }
+#Content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#title h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+#title p {
+  font-size: 18px;
+}
+
+#search {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#search input[type="text"] {
+  padding: 10px;
+  width: 60%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#search button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#pagination button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.centered-list {
+  text-align: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.centered-list li {
+  margin-bottom: 10px;
+}
+
+.centered-list li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 20px;
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.centered-list li a:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
   </style>
   
