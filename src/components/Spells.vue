@@ -4,18 +4,19 @@
       <h1>Page des sorts</h1>
     </div>
     <form id="search">
-      Search <input name="search" v-model="searchQuery">
+      <input type="text" v-model="filterName" placeholder="Entrez un nom de sort">
+      <button @click="fetchData">Rechercher</button>
     </form>
     <table>
       <thead>
         <tr>
           <th>Nom</th>
           <th>Effet</th>
-          <th>Categorie</th>
+          <th>Catégorie</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="spell in paginatedSpells" :key="spell.id">
+        <tr v-for="spell in Spells" :key="spell.id">
           <td>{{ spell.attributes.name }}</td>
           <td>{{ spell.attributes.effect }}</td>
           <td>{{ spell.attributes.category }}</td>
@@ -25,56 +26,51 @@
     <div id="pagination">
       <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
       <span>{{ currentPage }}</span>
-      <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+      <button @click="nextPage" :disabled="currentPage === nbpage">Next</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
-const spells = ref([])
-const searchQuery = ref('')
+const Spells = ref([])
 const itemsPerPage = 10
 let currentPage = ref(1)
+let nbpage = ref(1)
+const filterName = ref('')
 
 onMounted(async () => {
   try {
-    const response = await axios.get('https://api.potterdb.com/v1/spells')
-    spells.value = Object.values(response.data)[0] // récupère les valeurs sous forme d'array
+    await fetchData()
   } catch (error) {
-    console.error("Problème de chargement des spells via l'api", error)
+    console.error("Problème de chargement des sorts via l'api", error)
   }
 })
 
-const filteredSpells = computed(() => {
-  return spells.value.filter(spell => {
-    return spell.attributes.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    spell.attributes.effect.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      spell.attributes.category.toLowerCase().includes(searchQuery.value.toLowerCase())
-  })
-})
-
-const paginatedSpells = computed(() => {
-  const startIndex = (currentPage.value - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage
-  return filteredSpells.value.slice(startIndex, endIndex)
-})
-
-const totalPages = computed(() => {
-  return Math.ceil(filteredSpells.value.length / itemsPerPage)
-})
-
-function nextPage() {
-  if (currentPage.value < totalPages.value) {
-    currentPage.value++
+async function fetchData() {
+  try {
+    Spells.value = []
+    const response = await axios.get(`https://api.potterdb.com/v1/spells?filter[name_cont]=${filterName.value}&page[size]=${itemsPerPage}&page[number]=${currentPage.value}`)
+    Spells.value = response.data.data
+    nbpage = Math.ceil(response.data.meta.pagination.records / itemsPerPage)
+  } catch (error) {
+    console.error("Problème de chargement des sorts via l'api", error)
   }
 }
 
-function previousPage() {
+async function nextPage() {
+  if (currentPage.value < nbpage) {
+    currentPage.value++
+    await fetchData()
+  }
+}
+
+async function previousPage() {
   if (currentPage.value > 1) {
     currentPage.value--
+    await fetchData()
   }
 }
 </script>
