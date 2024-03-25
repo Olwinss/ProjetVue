@@ -1,3 +1,14 @@
+body {
+    background-image: url("/homepagebg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; /* Assure que l'image couvre entièrement l'élément */
+    background-position: center; /* Centre l'image dans l'élément */
+    margin: 0; /* Supprime les marges par défaut */
+    padding: 0; /* Supprime le padding par défaut */
+    min-height: 100vh; /* Assure que le corps prend au moins la hauteur de la fenêtre de visualisation */
+}
+
+
 /* Définition du thème sombre */
 :root {
     --bg-color: #121212; /* Couleur de fond */
@@ -208,11 +219,16 @@
 #HeaderContent h1{
     font-size: 70px;
     font-weight: bolder;
+    color:#ffffff;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
 }
 
 #HeaderContent p{
     text-align: center;
-    width:65%
+    width:65%;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
 }
 
 #search {
