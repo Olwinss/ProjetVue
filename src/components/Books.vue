@@ -3,6 +3,11 @@
     <div id="title">
       <h1>Page des livres</h1>
     </div>
+    <div id="pagination">
+      <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
+      <span>{{ currentPage }}</span>
+      <button @click="nextPage" :disabled="currentPage === nbpage">Next</button>
+    </div>
     <form id="search">
       <input type="text" v-model="filterTitle" placeholder="Entrez un titre de livre">
       <button @click="fetchData">Rechercher</button>

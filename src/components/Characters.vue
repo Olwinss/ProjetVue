@@ -3,14 +3,18 @@
     <div id="title">
       <h1>Page des personnages</h1>
     </div>
+    <div id="pagination">
+
+      <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
+      <span>{{ currentPage }}</span>
+      <button @click="nextPage" :disabled="currentPage === nbpage">Next</button>
+      <br>
+    </div>
+
     <form id="search">
+
       <input type="text" v-model="filterName" placeholder="Entrez un nom de personnage">
       <button @click="fetchData">Rechercher</button>
-      <div id="pagination">
-        <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
-        <span>{{ currentPage }}</span>
-        <button @click="nextPage" :disabled="currentPage === nbpage">Next</button>
-      </div>
     </form>
     <table>
       <thead>

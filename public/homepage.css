@@ -1,117 +1,289 @@
-/* Reset and Base Styles */
-body {
-    width: 98vw;
-    height: 98vh;
-    background-image: url('/home/Olwinss/ProjetVue/public/homepagegbg.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color: #000; /* Dark background for a magical feel */
-    color: #fff; /* White text for contrast */
+/* Définition du thème sombre */
+:root {
+    --bg-color: #121212; /* Couleur de fond */
+    --text-color: #f5f5f5; /* Couleur du texte */
+    --input-bg-color: #2c2c2c; /* Couleur de fond pour les champs de saisie */
+    --input-border-color: #444; /* Couleur de bordure pour les champs de saisie */
+    --button-bg-color: #333; /* Couleur de fond pour les boutons */
+    --button-hover-bg-color: #444; /* Couleur de fond pour les boutons au survol */
+    --table-border-color: #333; /* Couleur de bordure pour les tableaux */
+   }
+   
+   body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    font-family: 'Times New Roman', Times, serif; /* Classic font for a traditional feel */
-}
-
-/* Navigation */
-nav {
+   }
+   
+   #Content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+   }
+   
+   #title {
     text-align: center;
-    width: 100%;
-    height: 9.33vh;
+    margin-bottom: 20px;
+   }
+   
+   h1 {
+    color: var(--text-color);
+   }
+   
+   #search {
     display: flex;
-    align-items: center;
     justify-content: center;
-    background-color: #000; /* Black background */
-}
-
-nav ul {
+    margin-bottom: 20px;
+   }
+   
+   #search input[type="text"] {
+    width:42%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--input-border-color);
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+   }
+   
+   #search button {
+    padding: 10px 20px;
+    background-color: var(--button-bg-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+   }
+   
+   #search button:hover {
+    background-color: var(--button-hover-bg-color);
+   }
+   
+   table {
+    width: 100%;
+    border-collapse: collapse;
+   }
+   
+   th, td {
+    padding: 10px;
+    border: 1px solid var(--table-border-color);
+   }
+   
+   th {
+    background-color: #2c2c2c;
+    text-align: left;
+    color: var(--text-color);
+   }
+   
+   #pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+   }
+   
+   #pagination button {
+    padding: 10px 20px;
+    background-color: var(--button-bg-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+   }
+   
+   #pagination button:hover {
+    background-color: var(--button-hover-bg-color);
+   }
+   
+   #pagination button:disabled {
+    background-color: #444;
+    cursor: not-allowed;
+   }
+   
+   #pagination span {
+    margin: 0 10px;
+    color: var(--text-color);
+   }
+   
+/* Définition du thème sombre pour la navbar */
+:root {
+    --navbar-bg-color: #121212; /* Couleur de fond de la navbar */
+    --navbar-text-color: #f5f5f5; /* Couleur du texte de la navbar */
+    --navbar-link-color: #5badff; /* Couleur des liens de la navbar */
+    --navbar-link-hover-color: #0468cc; /* Couleur des liens de la navbar au survol */
+    --navbar-link-hover-bg-color: #2c2c2c; /* Couleur de fond des liens de la navbar au survol */
+   }
+   
+   nav {
+    background-color: var(--navbar-bg-color);
+    padding: 10px 0;
+   }
+   
+   nav ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
     display: flex;
-    align-items: center;
     justify-content: center;
-    height: 100%;
-    width: 100%;
+   }
+   
+   nav ul li {
+    margin: 0 10px;
+   }
+   
+   nav ul li h1 {
+    margin: 0;
+   }
+   
+   nav ul li a {
+    color: var(--navbar-link-color);
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Ajout d'une transition pour le survol */
+   }
+   
+   nav ul li a:hover {
+    background-color: var(--navbar-link-hover-bg-color); /* Couleur de fond au survol */
+    color: var(--navbar-link-hover-color); /* Couleur du texte au survol */
+   }
+   
+   /* Styles pour le contenu de la page */
+   body {
+    background-color: #16171d; /* Couleur de fond générale */
+    color: #fff; /* Couleur du texte générale */
+   }
+   
+   /* Styles pour le contenu spécifique à la page */
+   .router-link-exact-active {
+    color: #014894; /* Couleur du lien actif */
+   }
+   
+   /* Définition du thème sombre */
+:root {
+    --bg-color: #121212; /* Couleur de fond */
+    --text-color: #f5f5f5; /* Couleur du texte */
+    --input-bg-color: #2c2c2c; /* Couleur de fond pour les champs de saisie */
+    --input-border-color: #444; /* Couleur de bordure pour les champs de saisie */
+    --button-bg-color: #333; /* Couleur de fond pour les boutons */
+    --button-hover-bg-color: #444; /* Couleur de fond pour les boutons au survol */
+    --table-border-color: #333; /* Couleur de bordure pour les tableaux */
 }
 
-nav ul li {
-    display: inline-flex;
-    position: relative;
-    height: inherit;
-    justify-content: center;
-    margin-right: 20px;
-    padding: 0 50px;
-    transform-origin: center;
-    transition: transform 0.5s;
-    align-items: center;
+#Content {
+ max-width: 800px;
+ margin: 0 auto;
+ padding: 20px;
+ background-color: var(--bg-color);
+ color: var(--text-color);
 }
 
-nav li:hover {
-    transform: scale(1.5);
-}
-
-/* Title Section */
 #title {
+ text-align: center;
+ margin-bottom: 20px;
+}
+
+#title h1 {
+ font-size: 32px;
+ margin-bottom: 10px;
+ color: var(--text-color);
+}
+
+#title p {
+ font-size: 18px;
+ color: var(--text-color);
+}
+
+#HeaderContent #title{
     margin-top: 15vh;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content:center;
     flex-direction: column;
     align-items: center;
     text-align: center;
     font-weight: normal;
 }
 
-#title h1 {
+#HeaderContent h1{
     font-size: 70px;
     font-weight: bolder;
-    color: #fff; /* Light color for the title */
 }
 
-#title p {
+#HeaderContent p{
     text-align: center;
-    width: 65%;
-    color: #fff; /* Light color for the paragraph */
+    width:65%
 }
 
-/* Content Section */
-#Content {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+#search {
+ text-align: center;
+ margin-bottom: 20px;
 }
 
-/* Table Styles */
-table {
-    border: 2px solid #00f; /* Blue border for a magical feel */
-    border-radius: 3px;
-    background-color: #fff;
-    width: 100%;
+#search input[type="text"] {
+ padding: 10px;
+ width: 60%;
+ border: 1px solid var(--input-border-color);
+ border-radius: 5px;
+ background-color: var(--input-bg-color);
+ color: var(--text-color);
 }
 
-th, td {
-    min-width: 120px;
-    padding: 10px 20px;
+#search button {
+ padding: 10px 20px;
+ background-color: var(--button-bg-color);
+ color: var(--text-color);
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
 }
 
-th {
-    background-color: #00f; /* Blue background for the headers */
-    color: #fff;
+#search button:hover {
+ background-color: var(--button-hover-bg-color);
 }
 
-td {
-    background-color: #fff;
-    color: #000;
-}
-
-/* Pagination */
 #pagination {
-    margin-top: 10px;
+ text-align: center;
+ margin-top: 20px;
+ margin: 5px;
 }
 
 #pagination button {
-    margin: 0 5px;
-    padding: 5px 10px;
-    background-color: rgb(86, 86, 209); /* Blue background for the buttons */
-    color: #fff; /* White text for contrast */
+ padding: 10px 20px;
+ background-color: var(--button-bg-color);
+ color: var(--text-color);
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+}
+
+#pagination button:disabled {
+ background-color: #444;
+ cursor: not-allowed;
+}
+
+.centered-list {
+ text-align: center;
+ list-style-type: none;
+ padding: 0;
+}
+
+.centered-list li {
+ margin-bottom: 10px;
+}
+
+.centered-list li a {
+ text-decoration: none;
+ color: var(--text-color);
+ font-size: 20px;
+ display: inline-block;
+ padding: 10px 20px;
+ border: 1px solid var(--button-bg-color);
+ border-radius: 5px;
+ transition: background-color 0.3s, color 0.3s;
+}
+
+.centered-list li a:hover {
+ background-color: var(--button-hover-bg-color);
+ color: var(--text-color);
 }
