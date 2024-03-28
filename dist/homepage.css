@@ -1,51 +1,211 @@
-body{
-    width: 98vw;
-    height: 98vh;
-    background-image: url('/home/Olwinss/ProjetVue/public/homepagegbg.jpg');
-    background-size: 99%;
-    background-repeat:no-repeat;
-    background-color: black;
-    color: rgb(255, 255, 255);
+body {
+    background-image: url("/homepagebg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; /* Assure que l'image couvre entièrement l'élément */
+    background-position: center; /* Centre l'image dans l'élément */
+    margin: 0; /* Supprime les marges par défaut */
+    padding: 0; /* Supprime le padding par défaut */
+    min-height: 100vh; /* Assure que le corps prend au moins la hauteur de la fenêtre de visualisation */
 }
 
-nav {
+
+/* Définition du thème sombre */
+:root {
+    --bg-color: #121212; /* Couleur de fond */
+    --text-color: #f5f5f5; /* Couleur du texte */
+    --input-bg-color: #2c2c2c; /* Couleur de fond pour les champs de saisie */
+    --input-border-color: #444; /* Couleur de bordure pour les champs de saisie */
+    --button-bg-color: #333; /* Couleur de fond pour les boutons */
+    --button-hover-bg-color: #444; /* Couleur de fond pour les boutons au survol */
+    --table-border-color: #333; /* Couleur de bordure pour les tableaux */
+   }
+   
+   body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+   }
+   
+   #Content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+   }
+   
+   #title {
     text-align: center;
-    width:  100%;
-    height:  9.33vh; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-}
-
-nav ul {
-    list-style-type: none;
-    padding:  0;
+    margin-bottom: 20px;
+   }
+   
+   h1 {
+    color: var(--text-color);
+   }
+   
+   #search {
     display: flex;
-    align-items: center; 
-    justify-content:center; 
-    height:  100%; 
-    width:  100%; 
-}
-
-nav ul li {
-    display: inline-flex; 
-    position: relative;  
-    height: inherit;
     justify-content: center;
-    margin-right:  20px;
-    padding-right:  50px;
-    padding-left: 50px;
-    transform-origin: center;
-    transition: transform  0.5s;
-    align-items: center; 
+    margin-bottom: 20px;
+   }
+   
+   #search input[type="text"] {
+    width:42%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--input-border-color);
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+   }
+   
+   #search button {
+    padding: 10px 20px;
+    background-color: var(--button-bg-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+   }
+   
+   #search button:hover {
+    background-color: var(--button-hover-bg-color);
+   }
+   
+   table {
+    width: 100%;
+    border-collapse: collapse;
+   }
+   
+   th, td {
+    padding: 10px;
+    border: 1px solid var(--table-border-color);
+   }
+   
+   th {
+    background-color: #2c2c2c;
+    text-align: left;
+    color: var(--text-color);
+   }
+   
+   #pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+   }
+   
+   #pagination button {
+    padding: 10px 20px;
+    background-color: var(--button-bg-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+   }
+   
+   #pagination button:hover {
+    background-color: var(--button-hover-bg-color);
+   }
+   
+   #pagination button:disabled {
+    background-color: #444;
+    cursor: not-allowed;
+   }
+   
+   #pagination span {
+    margin: 0 10px;
+    color: var(--text-color);
+   }
+   
+/* Définition du thème sombre pour la navbar */
+:root {
+    --navbar-bg-color: #121212; /* Couleur de fond de la navbar */
+    --navbar-text-color: #f5f5f5; /* Couleur du texte de la navbar */
+    --navbar-link-color: #5badff; /* Couleur des liens de la navbar */
+    --navbar-link-hover-color: #0468cc; /* Couleur des liens de la navbar au survol */
+    --navbar-link-hover-bg-color: #2c2c2c; /* Couleur de fond des liens de la navbar au survol */
+   }
+   
+   nav {
+    background-color: var(--navbar-bg-color);
+    padding: 10px 0;
+   }
+   
+   nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+   }
+   
+   nav ul li {
+    margin: 0 10px;
+   }
+   
+   nav ul li h1 {
+    margin: 0;
+   }
+   
+   nav ul li a {
+    color: var(--navbar-link-color);
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Ajout d'une transition pour le survol */
+   }
+   
+   nav ul li a:hover {
+    background-color: var(--navbar-link-hover-bg-color); /* Couleur de fond au survol */
+    color: var(--navbar-link-hover-color); /* Couleur du texte au survol */
+   }
+   
+   /* Styles pour le contenu de la page */
+   body {
+    background-color: #16171d; /* Couleur de fond générale */
+    color: #fff; /* Couleur du texte générale */
+   }
+   
+   /* Styles pour le contenu spécifique à la page */
+   .router-link-exact-active {
+    color: #014894; /* Couleur du lien actif */
+   }
+   
+   /* Définition du thème sombre */
+:root {
+    --bg-color: #121212; /* Couleur de fond */
+    --text-color: #f5f5f5; /* Couleur du texte */
+    --input-bg-color: #2c2c2c; /* Couleur de fond pour les champs de saisie */
+    --input-border-color: #444; /* Couleur de bordure pour les champs de saisie */
+    --button-bg-color: #333; /* Couleur de fond pour les boutons */
+    --button-hover-bg-color: #444; /* Couleur de fond pour les boutons au survol */
+    --table-border-color: #333; /* Couleur de bordure pour les tableaux */
 }
 
-nav li:hover{
-    transform: scale(1.5);
+#Content {
+ max-width: 800px;
+ margin: 0 auto;
+ padding: 20px;
+ background-color: var(--bg-color);
+ color: var(--text-color);
 }
 
+#title {
+ text-align: center;
+ margin-bottom: 20px;
+}
 
-#title{
+#title h1 {
+ font-size: 32px;
+ margin-bottom: 10px;
+ color: var(--text-color);
+}
+
+#title p {
+ font-size: 18px;
+ color: var(--text-color);
+}
+
+#HeaderContent #title{
     margin-top: 15vh;
     width: 100%;
     display: flex;
@@ -56,12 +216,90 @@ nav li:hover{
     font-weight: normal;
 }
 
-#title h1{
+#HeaderContent h1{
     font-size: 70px;
     font-weight: bolder;
+    color:#ffffff;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
 }
 
-#title p{
+#HeaderContent p{
     text-align: center;
-    width:65%
+    width:65%;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+}
+
+#search {
+ text-align: center;
+ margin-bottom: 20px;
+}
+
+#search input[type="text"] {
+ padding: 10px;
+ width: 60%;
+ border: 1px solid var(--input-border-color);
+ border-radius: 5px;
+ background-color: var(--input-bg-color);
+ color: var(--text-color);
+}
+
+#search button {
+ padding: 10px 20px;
+ background-color: var(--button-bg-color);
+ color: var(--text-color);
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+}
+
+#search button:hover {
+ background-color: var(--button-hover-bg-color);
+}
+
+#pagination {
+ text-align: center;
+ margin-top: 20px;
+ margin: 5px;
+}
+
+#pagination button {
+ padding: 10px 20px;
+ background-color: var(--button-bg-color);
+ color: var(--text-color);
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+}
+
+#pagination button:disabled {
+ background-color: #444;
+ cursor: not-allowed;
+}
+
+.centered-list {
+ text-align: center;
+ list-style-type: none;
+ padding: 0;
+}
+
+.centered-list li {
+ margin-bottom: 10px;
+}
+
+.centered-list li a {
+ text-decoration: none;
+ color: var(--text-color);
+ font-size: 20px;
+ display: inline-block;
+ padding: 10px 20px;
+ border: 1px solid var(--button-bg-color);
+ border-radius: 5px;
+ transition: background-color 0.3s, color 0.3s;
+}
+
+.centered-list li a:hover {
+ background-color: var(--button-hover-bg-color);
+ color: var(--text-color);
 }

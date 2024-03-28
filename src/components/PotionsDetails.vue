@@ -1,5 +1,5 @@
 <template>
-    <div id="HeaderContent" class="potion-container">
+    <div id="Content">
       <div id="title">
         <h1> Page de la potion :</h1>
         <img v-if="potion.data.attributes.image !== null" :src="potion.data.attributes.image" :alt="potion.data.attributes.name" class="potion-image"/>
