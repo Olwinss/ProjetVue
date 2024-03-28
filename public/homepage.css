@@ -130,7 +130,10 @@ body {
    
    nav {
     background-color: var(--navbar-bg-color);
+    opacity:0.85;
+
     padding: 10px 0;
+    
    }
    
    nav ul {
