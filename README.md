@@ -4,7 +4,7 @@
  
 BUT Informatique - 2ème Année
  
-Ressource R4.A.10 - Développement Web
+Ressource R4.A.10 - Complément web
 
 Pour lancer ce projet, il suffit d'installer les node-modules (si non présent)
 
